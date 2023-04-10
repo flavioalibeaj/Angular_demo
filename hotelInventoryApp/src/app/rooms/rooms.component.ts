@@ -21,6 +21,8 @@ export class RoomsComponent implements OnInit{
     bookedRooms: 5
   }
 
+  title = "Room List"
+
   roomList: RoomList[] = []
 
   constructor(){}
@@ -62,9 +64,25 @@ export class RoomsComponent implements OnInit{
 
   toggle = (): void => {
     this.hideRooms = !this.hideRooms
+    this.title = "Changed Room List"
   }
 
   selectRoom(room: RoomList){
     this.selectedRoom = room
+  }
+
+  addRoom(){
+    const room: RoomList = {
+      roomNumber: 4,
+      roomType: "VIP Suite",
+      amenities: "AC, Free Wi-fi, Bathroom, TV, Kitchen",
+      price: 1500,
+      photos: "https://images.unsplash.com/photo-1591088398332-8a7791972843?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
+      checkInTime: new Date("11-05-2023"),
+      checkOutTime: new Date("12-05-2023"),
+      rating: 5
+    }
+    // this.roomList.push(room)
+    this.roomList = [...this.roomList, room]
   }
 }
