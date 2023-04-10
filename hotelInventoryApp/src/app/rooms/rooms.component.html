@@ -9,7 +9,7 @@
 
 <div *ngIf="room.availableRooms > 0">
     Rooms List
-    <table>
+    <table class="table">
         <tr>
             <th>Index</th>
             <th>Even / Odd</th>
@@ -22,7 +22,7 @@
         </tr>
         <tr 
         [ngClass]="e? 'even' : 'odd'" 
-        *ngFor="let room of roomList | slice: 0:1; let i = index; let e = even; let o = odd">
+        *ngFor="let room of roomList | slice: 0:3; let i = index; let e = even; let o = odd">
             <td>{{i}}</td>
             <td>{{e? "Even" : "Odd"}}</td>
             <td>{{room.roomNumber}}</td>
