@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Room, RoomList } from './rooms';
 
 @Component({
@@ -6,12 +6,14 @@ import { Room, RoomList } from './rooms';
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss']
 })
-export class RoomsComponent {
+export class RoomsComponent implements OnInit{
   hotelName: string = "Onyx Hotel"
 
   numberOfRooms: number = 10
 
   hideRooms: boolean = false
+
+  selectedRoom!: RoomList
 
   room: Room = {
     totalRooms: 20,
@@ -19,40 +21,50 @@ export class RoomsComponent {
     bookedRooms: 5
   }
 
-  roomList: RoomList[] = [
-    {
-      roomNumber: 91,
-      roomType: "Deluxe Room",
-      amenities: "AC, Free Wi-fi, Bathroom, TV, Kitchen",
-      price: 200,
-      photos: "https://images.unsplash.com/photo-1591088398332-8a7791972843?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
-      checkInTime: new Date("08-04-2023"),
-      checkOutTime: new Date("11-04-2023"),
-      rating: 4
-    },
-    {
-      roomNumber: 32,
-      roomType: "Deluxe Room",
-      amenities: "AC, Free Wi-fi, Bathroom, TV, Kitchen",
-      price: 500,
-      photos: "https://images.unsplash.com/photo-1591088398332-8a7791972843?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
-      checkInTime: new Date("11-06-2023"),
-      checkOutTime: new Date("14-06-2023"),
-      rating: 4.5
-    },
-    {
-      roomNumber: 311,
-      roomType: "Private Suite",
-      amenities: "AC, Free Wi-fi, Bathroom, TV, Kitchen",
-      price: 1000,
-      photos: "https://images.unsplash.com/photo-1591088398332-8a7791972843?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
-      checkInTime: new Date("11-06-2023"),
-      checkOutTime: new Date("12-06-2023"),
-      rating: 5.0
-    }
-  ]
+  roomList: RoomList[] = []
+
+  constructor(){}
+  ngOnInit(): void{
+    this.roomList = [
+      {
+        roomNumber: 91,
+        roomType: "Deluxe Room",
+        amenities: "AC, Free Wi-fi, Bathroom, TV, Kitchen",
+        price: 200,
+        photos: "https://images.unsplash.com/photo-1591088398332-8a7791972843?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
+        checkInTime: new Date("08-04-2023"),
+        checkOutTime: new Date("11-04-2023"),
+        rating: 4
+      },
+      {
+        roomNumber: 32,
+        roomType: "Deluxe Room",
+        amenities: "AC, Free Wi-fi, Bathroom, TV, Kitchen",
+        price: 500,
+        photos: "https://images.unsplash.com/photo-1591088398332-8a7791972843?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
+        checkInTime: new Date("11-06-2023"),
+        checkOutTime: new Date("14-06-2023"),
+        rating: 4.5
+      },
+      {
+        roomNumber: 311,
+        roomType: "Private Suite",
+        amenities: "AC, Free Wi-fi, Bathroom, TV, Kitchen",
+        price: 1000,
+        photos: "https://images.unsplash.com/photo-1591088398332-8a7791972843?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
+        checkInTime: new Date("11-06-2023"),
+        checkOutTime: new Date("12-06-2023"),
+        rating: 5.0
+      }
+    ]
+  }
+
 
   toggle = (): void => {
     this.hideRooms = !this.hideRooms
+  }
+
+  selectRoom(room: RoomList){
+    this.selectedRoom = room
   }
 }
