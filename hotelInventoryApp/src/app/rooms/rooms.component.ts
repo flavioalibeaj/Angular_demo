@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { Room, RoomList } from './rooms';
 
 @Component({
@@ -6,7 +6,7 @@ import { Room, RoomList } from './rooms';
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss']
 })
-export class RoomsComponent implements OnInit{
+export class RoomsComponent implements OnInit, DoCheck{
   hotelName: string = "Onyx Hotel"
 
   numberOfRooms: number = 10
@@ -59,6 +59,10 @@ export class RoomsComponent implements OnInit{
         rating: 5.0
       }
     ]
+  }
+
+  ngDoCheck(){
+    console.log("on changes is called")
   }
 
 
