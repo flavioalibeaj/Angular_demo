@@ -1,6 +1,7 @@
-import { Component, OnInit, DoCheck, ViewChild, AfterViewInit, AfterViewChecked, ViewChildren, QueryList, OnDestroy} from '@angular/core';
+import { Component, OnInit, DoCheck, ViewChild, AfterViewInit, AfterViewChecked, ViewChildren, QueryList, OnDestroy, SkipSelf} from '@angular/core';
 import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
+import { RoomsService } from './services/rooms.service';
 
 @Component({
   selector: 'app-rooms',
@@ -29,40 +30,11 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent
   @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>
 
-  constructor(){}
+  constructor(@SkipSelf() private roomService: RoomsService){}
+
   ngOnInit(): void{
-    this.roomList = [
-      {
-        roomNumber: 91,
-        roomType: "Deluxe Room",
-        amenities: "AC, Free Wi-fi, Bathroom, TV, Kitchen",
-        price: 200,
-        photos: "https://images.unsplash.com/photo-1591088398332-8a7791972843?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
-        checkInTime: new Date("08-04-2023"),
-        checkOutTime: new Date("11-04-2023"),
-        rating: 4
-      },
-      {
-        roomNumber: 32,
-        roomType: "Deluxe Room",
-        amenities: "AC, Free Wi-fi, Bathroom, TV, Kitchen",
-        price: 500,
-        photos: "https://images.unsplash.com/photo-1591088398332-8a7791972843?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
-        checkInTime: new Date("11-06-2023"),
-        checkOutTime: new Date("14-06-2023"),
-        rating: 4.5
-      },
-      {
-        roomNumber: 311,
-        roomType: "Private Suite",
-        amenities: "AC, Free Wi-fi, Bathroom, TV, Kitchen",
-        price: 1000,
-        photos: "https://images.unsplash.com/photo-1591088398332-8a7791972843?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
-        checkInTime: new Date("11-06-2023"),
-        checkOutTime: new Date("12-06-2023"),
-        rating: 5.0
-      }
-    ]
+    this.roomList = this.roomService.getRooms()
+    // this.roomService.getRooms().subscribe((data) => this.roomList(data))
   }
 
   ngDoCheck(){
